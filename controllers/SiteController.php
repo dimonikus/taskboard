@@ -54,6 +54,14 @@ class SiteController extends Controller
         ];
     }
 
+    public function beforeAction($action)
+    {
+        if (Yii::$app->user->isGuest && $this->action->id !== 'login') {
+            return $this->redirect('login');
+        }
+        return parent::beforeAction($action);
+    }
+
     /**
      * Displays homepage.
      *
@@ -95,7 +103,7 @@ class SiteController extends Controller
     {
         Yii::$app->user->logout();
 
-        return $this->goHome();
+        return $this->redirect('login');
     }
 
     /**

@@ -19,7 +19,7 @@ class SiteController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'only' => ['logout'],
                 'rules' => [
                     [
@@ -30,9 +30,9 @@ class SiteController extends Controller
                 ],
             ],
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
-                    'logout' => ['post'],
+                    'logout' => ['get'],
                 ],
             ],
         ];
@@ -57,7 +57,7 @@ class SiteController extends Controller
     public function beforeAction($action)
     {
         if (Yii::$app->user->isGuest && $this->action->id !== 'login') {
-            return $this->redirect('login');
+            return $this->redirect('/site/login');
         }
         return parent::beforeAction($action);
     }
@@ -88,6 +88,7 @@ class SiteController extends Controller
             return $this->goBack();
         }
 
+        $this->layout = 'main-login';
         $model->password = '';
         return $this->render('login', [
             'model' => $model,

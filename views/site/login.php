@@ -31,14 +31,9 @@ $fieldOptions2 = [
         <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
         <?= $form
-            ->field($model, 'username', $fieldOptions1)
-            ->label(false)
-            ->textInput(['placeholder' => $model->getAttributeLabel('username')]) ?>
-
-        <?php /*$form
             ->field($model, 'email', $fieldOptions1)
             ->label(false)
-            ->textInput(['placeholder' => $model->getAttributeLabel('email')])*/ ?>
+            ->textInput(['placeholder' => $model->getAttributeLabel('email')]) ?>
 
         <?= $form
             ->field($model, 'password', $fieldOptions2)

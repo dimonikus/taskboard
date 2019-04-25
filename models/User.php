@@ -2,7 +2,18 @@
 
 namespace app\models;
 
-class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
+/**
+ * This is the model class for table "user".
+ *
+ * @property int $id
+ * @property string $first_name Имя
+ * @property string $last_name Фамилия
+ * @property string $email Email
+ * @property string $password Пароль
+ * @property string $date_entered Дата создания
+ * @property string $date_modified Дата редактирования
+ */
+class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
     public $id;
     public $username;
@@ -10,30 +21,51 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
     public $authKey;
     public $accessToken;
 
-    private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
-    ];
+    /**
+     * {@inheritdoc}
+     */
+    public static function tableName()
+    {
+        return 'user';
+    }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return [
+            [['date_entered', 'date_modified'], 'safe'],
+            [['first_name', 'last_name'], 'string', 'max' => 16],
+            [['email'], 'string', 'max' => 32],
+            [['password'], 'string', 'max' => 64],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'first_name' => 'Имя',
+            'last_name' => 'Фамилия',
+            'email' => 'Email',
+            'password' => 'Пароль',
+            'date_entered' => 'Дата создания',
+            'date_modified' => 'Дата редактирования',
+        ];
+    }
 
     /**
      * {@inheritdoc}
      */
     public static function findIdentity($id)
     {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        return static::find()->andWhere([
+            'id' => $id,
+        ])->one();
     }
 
     /**
@@ -41,13 +73,20 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        foreach (self::$users as $user) {
-            if ($user['accessToken'] === $token) {
-                return new static($user);
-            }
-        }
+        return static::find()->andWhere([
+            'accessToken' => $token,
+        ])->cache(60*60)->one();
+    }
 
-        return null;
+    /**
+     * @param $email
+     * @return null|static
+     */
+    public static function findByEmail($email)
+    {
+        return static::find()->andWhere([
+            'email' => $email,
+        ])->cache(60)->one();
     }
 
     /**

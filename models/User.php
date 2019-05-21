@@ -15,9 +15,6 @@ namespace app\models;
  */
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
-    public $id;
-    public $username;
-    public $password;
     public $authKey;
     public $accessToken;
 
@@ -80,30 +77,13 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     /**
      * @param $email
-     * @return null|static
+     * @return array|null|\yii\db\ActiveRecord
      */
     public static function findByEmail($email)
     {
         return static::find()->andWhere([
             'email' => $email,
         ])->cache(60)->one();
-    }
-
-    /**
-     * Finds user by username
-     *
-     * @param string $username
-     * @return static|null
-     */
-    public static function findByUsername($username)
-    {
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
-        }
-
-        return null;
     }
 
     /**

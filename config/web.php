@@ -46,8 +46,16 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'baseUrl' => '/',
             'rules' => [
+//                '<module>/<action>' => '<module>/default/<action>',
+//                'user/<action>' => 'user/default/<action>',
             ],
+        ],
+    ],
+    'modules' => [
+        'user' => [
+            'class' => 'app\modules\user\Module',
         ],
     ],
     'params' => $params,

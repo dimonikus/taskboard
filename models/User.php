@@ -15,6 +15,7 @@ namespace app\models;
  */
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
+    const SCENARIO_CREATE = 1;
     public $authKey;
     public $accessToken;
 
@@ -32,11 +33,17 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['date_entered', 'date_modified'], 'safe'],
             [['first_name', 'last_name'], 'string', 'max' => 16],
             [['email'], 'string', 'max' => 32],
             [['password'], 'string', 'max' => 64],
+            [['password', 'first_name', 'last_name', 'email'], 'required'],
+            [['password'], 'hashPassword', 'on' => self::SCENARIO_CREATE],
         ];
+    }
+
+    public function hashPassword()
+    {
+        $this->password = md5($this->password);
     }
 
     /**
@@ -118,6 +125,6 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public function validatePassword($password)
     {
-        return $this->password === $password;
+        return $this->password === md5($password);
     }
 }

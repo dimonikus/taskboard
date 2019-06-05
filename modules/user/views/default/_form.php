@@ -30,6 +30,8 @@ use yii\widgets\ActiveForm;
 
         <?php endif; ?>
 
+        <?= $form->field($model, 'file')->fileInput()->label('Аватар') ?>
+
     </div>
 
     <div class="box-footer">

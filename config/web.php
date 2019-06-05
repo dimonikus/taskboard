@@ -1,15 +1,17 @@
 <?php
-
+Yii::setAlias('@web', dirname(__DIR__));
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
+    'language' => 'ru',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
+        '@uploads' => '@web/uploads',
     ],
     'components' => [
         'request' => [

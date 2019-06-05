@@ -26,9 +26,9 @@ $attributes = [
             <img class="profile-user-img img-responsive img-circle" src="/assets/ab695332/img/user2-160x160.jpg"
                  alt="User profile picture">
 
-            <h3 class="profile-username text-center">Nina Mcintire</h3>
+            <h3 class="profile-username text-center"><?= $model->getFullName() ?></h3>
 
-            <p class="text-muted text-center">Software Engineer</p>
+            <p class="text-muted text-center">Software Engineer <?= \Yii::getAlias('@uploads') ?></p>
 
             <ul class="list-group list-group-unbordered">
                 <?php foreach ($attributes as $attribute): ?>

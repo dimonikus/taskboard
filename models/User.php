@@ -9,6 +9,7 @@ namespace app\models;
  * @property string $first_name Имя
  * @property string $last_name Фамилия
  * @property string $email Email
+ * @property string $avatar
  * @property string $password Пароль
  * @property string $date_entered Дата создания
  * @property string $date_modified Дата редактирования
@@ -16,8 +17,10 @@ namespace app\models;
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
     const SCENARIO_CREATE = 1;
+
     public $authKey;
     public $accessToken;
+    public $file;
 
     /**
      * {@inheritdoc}
@@ -33,10 +36,12 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['first_name', 'last_name'], 'string', 'max' => 16],
+            [['first_name', 'last_name', 'avatar'], 'string', 'max' => 16],
             [['email'], 'string', 'max' => 32],
-            [['password'], 'string', 'max' => 64],
+            [['file'], 'safe'],
+            [['password'], 'string', 'min' => 4, 'max' => 64],
             [['password', 'first_name', 'last_name', 'email'], 'required'],
+            [['password', 'first_name', 'last_name', 'email'], 'trim'],
             [['password'], 'hashPassword', 'on' => self::SCENARIO_CREATE],
         ];
     }
@@ -126,5 +131,14 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function validatePassword($password)
     {
         return $this->password === md5($password);
+    }
+
+    /**
+     * create full user name
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->first_name . ' ' . $this->last_name;
     }
 }

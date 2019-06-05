@@ -5,6 +5,7 @@ namespace app\modules\user\controllers;
 use Yii;
 use app\models\User;
 use yii\data\ActiveDataProvider;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -73,6 +74,10 @@ class DefaultController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        if ($model->hasErrors()) {
+            VarDumper::dump($model->getErrors());die;
         }
 
         return $this->render('update', [

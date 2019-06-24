@@ -1,5 +1,5 @@
 <?php
-Yii::setAlias('@web', dirname(__DIR__));
+Yii::setAlias('@app', dirname(__DIR__));
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
@@ -11,7 +11,7 @@ $config = [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
-        '@uploads' => '@web/uploads',
+        '@uploads' => '@app/web/uploads',
     ],
     'components' => [
         'request' => [

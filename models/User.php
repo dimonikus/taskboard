@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+//use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "user".
@@ -36,13 +37,14 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['first_name', 'last_name', 'avatar'], 'string', 'max' => 16],
-            [['email'], 'string', 'max' => 32],
+            [['first_name', 'last_name'], 'string', 'max' => 16],
+            [['email', 'avatar'], 'string', 'max' => 32],
             [['file'], 'safe'],
             [['password'], 'string', 'min' => 4, 'max' => 64],
             [['password', 'first_name', 'last_name', 'email'], 'required'],
             [['password', 'first_name', 'last_name', 'email'], 'trim'],
             [['password'], 'hashPassword', 'on' => self::SCENARIO_CREATE],
+            [['file'], 'file', 'extensions'=>'jpg, gif, png'],
         ];
     }
 
@@ -65,6 +67,26 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'date_entered' => 'Дата создания',
             'date_modified' => 'Дата редактирования',
         ];
+    }
+
+    /**
+     * @param array $data
+     * @param null $formName
+     * @return bool
+     */
+    public function load($data, $formName = null)
+    {
+        if (parent::load($data, $formName)) {
+            if ($this->file = \yii\web\UploadedFile::getInstance($this, 'file')) {
+                $image = new ImageHelper();
+                $image->setImageFile($this->file);
+                $this->avatar = $image->uploadImage($this);
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -140,5 +162,15 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function getFullName()
     {
         return $this->first_name . ' ' . $this->last_name;
+    }
+
+    public function getAvatar()
+    {
+        $path = null;
+        if (!empty($this->avatar)) {
+            $path = '/uploads/user/' . $this->avatar;
+        }
+
+        return $path;
     }
 }

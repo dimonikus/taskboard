@@ -5,9 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
 
-$this->title = $model->id;
+$this->title = 'Профиль пользователя';
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $model->getFullName();
 \yii\web\YiiAsset::register($this);
 $attributes = [
     'id',
@@ -23,7 +23,7 @@ $attributes = [
     <div class="box box-primary">
         <div class="box-body box-profile">
 
-            <img class="profile-user-img img-responsive img-circle" src="/assets/ab695332/img/user2-160x160.jpg"
+            <img class="profile-user-img img-responsive img-circle" src="<?= $model->getAvatar() ?>"
                  alt="User profile picture">
 
             <h3 class="profile-username text-center"><?= $model->getFullName() ?></h3>

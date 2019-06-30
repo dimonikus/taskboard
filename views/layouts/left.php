@@ -31,7 +31,16 @@
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
                     ['label' => 'Menu', 'options' => ['class' => 'header']],
-                    ['label' => 'Users', 'icon' => 'user-plus', 'url' => ['/user/default/index']],
+                    [
+                        'label' => 'Users',
+                        'icon' => 'user-plus',
+                        'url' => '#',
+                        'items' => [
+                            ['label' => 'Пользователи', 'icon' => 'user-plus', 'url' => ['/user/default/index'],],
+                            ['label' => 'Должность', 'icon' => 'dashboard', 'url' => ['/user/position/index'],],
+                            ['label' => 'Отдел', 'icon' => 'dashboard', 'url' => ['/user/department/index'],],
+                        ],
+                    ],
                     ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
                     ['label' => 'Logout', 'url' => ['site/logout'], 'visible' => !Yii::$app->user->isGuest],
                     [

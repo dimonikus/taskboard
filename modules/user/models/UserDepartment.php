@@ -3,6 +3,7 @@
 namespace app\modules\user\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "user_department".
@@ -39,5 +40,18 @@ class UserDepartment extends \yii\db\ActiveRecord
             'id' => 'ID',
             'department' => 'Отдел',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPosition()
+    {
+        return $this->hasMany(UserPosition::class, ['department_id' => 'id']);
+    }
+
+    public static function getUserDepartmentList()
+    {
+        return ArrayHelper::map(self::find()->asArray()->all(), 'id', 'department');
     }
 }

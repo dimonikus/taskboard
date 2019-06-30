@@ -16,6 +16,7 @@ class m190624_203510_add_table_user_position extends Migration
             [
                 'id' => $this->primaryKey(),
                 'position' => $this->string(32)->notNull()->defaultValue('')->comment('Должность'),
+                'department_id' => $this->integer()->comment('Связь с отделом'),
             ]
         );
     }

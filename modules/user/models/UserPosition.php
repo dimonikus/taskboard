@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "user_position".
  *
  * @property int $id
+ * @property int $department_id
  * @property string $position Должность
  */
 class UserPosition extends \yii\db\ActiveRecord
@@ -27,6 +28,7 @@ class UserPosition extends \yii\db\ActiveRecord
     {
         return [
             [['position'], 'string', 'max' => 32],
+            [['department_id'], 'safe'],
         ];
     }
 
@@ -39,5 +41,13 @@ class UserPosition extends \yii\db\ActiveRecord
             'id' => 'ID',
             'position' => 'Должность',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDepartment()
+    {
+        return $this->hasOne(UserDepartment::class, ['id' => 'department_id']);
     }
 }

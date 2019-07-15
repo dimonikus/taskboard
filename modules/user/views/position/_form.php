@@ -8,17 +8,25 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="user-position-form">
+<div class="box box-<?= $model->isNewRecord ? 'success' : 'primary' ?>">
+
+    <div class="box-header with-border">
+        <h3 class="box-title"><?= Html::encode($this->title) ?></h3>
+    </div>
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'department_id')
-        ->dropDownList(\app\modules\user\models\UserDepartment::getUserDepartmentList()) ?>
+    <div class="box-body">
 
-    <?= $form->field($model, 'position')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'department_id')
+            ->dropDownList(\app\modules\user\models\UserDepartment::getUserDepartmentList()) ?>
 
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= $form->field($model, 'position')->textInput(['maxlength' => true]) ?>
+    </div>
+    <div class="box-footer">
+        <div class="form-group">
+            <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        </div>
     </div>
 
     <?php ActiveForm::end(); ?>

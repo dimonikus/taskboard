@@ -31,7 +31,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'position',
-            'department_id',
+            [
+                'attribute' => 'department_id',
+                'label' => 'Отдел',
+                'value' => function ($data) {
+                    /* @var $data \app\modules\user\models\UserPosition */
+                    /* @var $department \app\modules\user\models\UserDepartment */
+                    $department = $data->getDepartment()->limit(1)->one();
+                    return $department ? $department->department : null;
+                },
+            ]
         ],
     ]) ?>
 

@@ -10,20 +10,16 @@ $this->title = 'Пользователи';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
-    <p>
-        <?= Html::a('Создать пользователя', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">Hover Data Table</h3>
+            <p class="pull-right">
+                <?= Html::a('Создать пользователя', ['create'], ['class' => 'btn btn-success']) ?>
+            </p>
         </div>
         <div class="box-body">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
             'id',
             'first_name',
             'last_name',
@@ -33,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'date_entered',
             //'date_modified',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn', 'contentOptions'=>['style'=>'width: 100px']],
         ],
     ]); ?>
         </div>

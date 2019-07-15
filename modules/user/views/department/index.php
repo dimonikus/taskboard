@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -10,9 +10,9 @@ $this->title = 'Отдел';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="department-index">
-        <div class="box">
+    <div class="box">
         <div class="box-header">
-            <p>
+            <p class="pull-right">
                 <?= Html::a('Добавить отдел', ['create'], ['class' => 'btn btn-success']) ?>
             </p>
         </div>
@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'columns' => [
                     'id',
                     'department',
-                    ['class' => 'yii\grid\ActionColumn'],
+                    ['class' => 'yii\grid\ActionColumn', 'contentOptions' => ['style' => 'width: 100px']],
                 ],
             ]); ?>
         </div>

@@ -3,14 +3,14 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\User */
+/* @var $model \app\modules\user\models\UserDepartment */
 
-$this->title = 'Update User: ' . $model->id;
+$this->title = 'Отдел: ' . $model->department;
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="user-update">
+<div class="department-update">
 
     <?= $this->render('_form', [
         'model' => $model,

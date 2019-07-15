@@ -30,6 +30,11 @@ use yii\widgets\ActiveForm;
 
         <?php endif; ?>
 
+        <?= $form->field($model, 'department')
+            ->dropDownList(\app\modules\user\models\UserDepartment::getUserDepartmentList()) ?>
+
+        <?= $form->field($model, 'position')->textInput(['maxlength' => true]) ?>
+
         <?= $form->field($model, 'file')->fileInput()->label('Аватар') ?>
 
     </div>

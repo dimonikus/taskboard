@@ -14,9 +14,12 @@
       <mask>*.css</mask>
       <mask>*.mxml</mask>
       <mask>*.p</mask>
+      <mask>*.j</mask>
+      <mask>*.сыы</mask>
+      <mask>*.сы</mask>
+      <mask>*.с</mask>
       <mask>*.</mask>
       <mask>*.php</mask>
-      <mask>*.j</mask>
       <mask>*.js</mask>
     </recentFileMasks>
   </component>

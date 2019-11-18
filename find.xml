@@ -15,14 +15,14 @@
       <mask>*.сыы</mask>
       <mask>*.сы</mask>
       <mask>*.с</mask>
-      <mask>*.j</mask>
-      <mask>*.</mask>
       <mask>*.c</mask>
       <mask>*.cs</mask>
       <mask>*.css</mask>
-      <mask>*.js</mask>
       <mask>*.*</mask>
       <mask>*.p</mask>
+      <mask>*.js</mask>
+      <mask>*.j</mask>
+      <mask>*.</mask>
       <mask>*.php</mask>
     </recentFileMasks>
   </component>

@@ -20,9 +20,9 @@
       <mask>*.css</mask>
       <mask>*.*</mask>
       <mask>*.p</mask>
-      <mask>*.js</mask>
       <mask>*.j</mask>
       <mask>*.</mask>
+      <mask>*.js</mask>
       <mask>*.php</mask>
     </recentFileMasks>
   </component>
